@@ -2,6 +2,7 @@ import java.util.*;
 
 class Graph {
     private Map<Integer, List<Edge>> adjList = new HashMap<>();
+    private Map<Integer, double[]> coordinates = new HashMap<>(); // Stores {lat, lon} for each node
 
     static class Edge {
         int target;
@@ -13,9 +14,17 @@ class Graph {
         }
     }
 
+    public void addNode(int id, double lat, double lon) {
+        coordinates.put(id, new double[]{lat, lon});
+    }
+
     public void addEdge(int u, int v, double weight){
         adjList.computeIfAbsent(u, k -> new ArrayList<>()).add(new Edge(v, weight));
         adjList.computeIfAbsent(v, k -> new ArrayList<>()).add(new Edge(u, weight));
+    }
+
+    public double[] getCoordinates(int node) {
+        return coordinates.getOrDefault(node, new double[]{0, 0});
     }
 
     public Map<Integer, List<Edge>> getAdjList() {
