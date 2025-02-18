@@ -18,6 +18,10 @@ class Graph {
         adjList.computeIfAbsent(v, k -> new ArrayList<>()).add(new Edge(u, weight));
     }
 
+    public Map<Integer, List<Edge>> getAdjList() {
+        return adjList;
+    }
+
     public void printGraph(){
         for (var entry : adjList.entrySet()) {
             System.out.print("Node " + entry.getKey() + " -> ");
